@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+</head>
+<body>
+<!-- Header with Navigation - Visible initially -->
+    <header class="header-initial">
+        <nav>
+            <img src="iconos/menu.svg" class="hamburger" alt="Menu">
+            <div class="nav-menu">
+                
+                <ul>
+                    <button class="menu-close">
+                        <img src="iconos/equis-negra.svg" alt="Cerrar menú">
+                    </button>
+                    <li><a href="#home">Inicio</a></li>
+                    <li><a href="#about">Acerca de mi</a></li>
+                    <li><a href="#portfolio">Experiencia</a></li>
+                    <li><a href="#services">Logros</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+<!-- Header that appears on scroll -->
+<header class="header-scroll">
+    <nav>
+        <img src="iconos/menu-negro.svg" class="hamburger" alt="Menu">
+        <div class="nav-menu">
+            <ul>
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#about">Acerca de mi</a></li>
+                <li><a href="#portfolio">Experiencia</a></li>
+                <li><a href="#services">Logros</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+    <main>
+        <!-- Section 1: Hero / Home -->
+    <section class="section1" id="home">
+        <div class="section1-content">
+    <h2>Portafolio</h2>
+    <p>Juan Diego Barbosa Valencia</p>
+    <p class="section1-subtitle">Diseñador UX/UI | Desarrollador Front-end Web  3D y realidad aumentada</p>
+
+    <div class="section1-icons">
+      <img src="iconos/image 10.png" class="icon icon-1">
+      <img src="iconos/image 8.png" class="icon icon-2">
+      <img src="iconos/image 9.png" class="icon icon-3">
+      <img src="iconos/3dicons-3d-dynamic-gradient.png" class="icon icon-4">
+    </div>
+        </div>
+    </section>
+    
+    <div class="Contacto-icon"><img src="iconos/llamada.png"  alt="Boton de Contacto"></div>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const icons = document.querySelector(".section1-icons");
+    const subtitle = document.querySelector(".section1-subtitle");
+    let triggered = false;
+
+  window.addEventListener("wheel", (e) => {
+    if (
+      !triggered &&
+      window.scrollY === 0 &&     // solo si está arriba
+      e.deltaY > 0               // solo si intenta bajar
+    ) {
+      e.preventDefault();        // bloquea el scroll
+      icons.classList.add("visible");
+      subtitle.classList.add("visible");
+      triggered = true;
+
+      // libera el scroll después de la animación
+      setTimeout(() => {
+        window.removeEventListener("wheel", arguments.callee);
+      }, 700);
+    }
+  }, { passive: false });
+});
+
+// Script para mostrar/ocultar headers según el scroll
+const headerInitial = document.querySelector('.header-initial');
+const headerScroll = document.querySelector('.header-scroll');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        // Mostrar header-scroll, ocultar header-initial
+        headerInitial.style.opacity = '0';
+        headerInitial.style.pointerEvents = 'none';
+        headerScroll.classList.add('visible');
+    } else {
+        // Mostrar header-initial, ocultar header-scroll
+        headerInitial.style.opacity = '1';
+        headerInitial.style.pointerEvents = 'auto';
+        headerScroll.classList.remove('visible');
+    }
+});
+
+// Hamburger menu toggle
+document.querySelectorAll('.hamburger').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const header = btn.closest('header');
+    const menu = header.querySelector('.nav-menu');
+    const isOpen = menu.classList.toggle('active');
+    document.body.classList.toggle('menu-open', isOpen);
+    btn.src = isOpen ? 'iconos/equis-negra.svg' : 
+      (header.classList.contains('header-initial') ? 'iconos/menu.svg' : 'iconos/menu-negro.svg');
+  });
+});
+
+// Close menu close button
+document.addEventListener('click', (e) => {
+  if (e.target.closest('.menu-close')) {
+    const menu = e.target.closest('.nav-menu');
+    const hamburger = document.querySelector('.hamburger');
+    menu.classList.remove('active');
+    document.body.classList.remove('menu-open');
+    const header = hamburger.closest('header');
+    hamburger.src = header.classList.contains('header-initial') ? 'iconos/menu.svg' : 'iconos/menu-negro.svg';
+    return;
+  }
+  
+  if (e.target.closest('header nav ul li a')) {
+    document.body.classList.remove('menu-open');
+    document.querySelectorAll('.nav-menu').forEach(menu => menu.classList.remove('active'));
+    document.querySelectorAll('.hamburger').forEach(btn => {
+      const header = btn.closest('header');
+      btn.src = header.classList.contains('header-initial') ? 'iconos/menu.svg' : 'iconos/menu-negro.svg';
+    });
+  }
+});
+
+    </script>
+        <!-- Section 2: About -->
+    <section class="section2" id="about">
+            <h2>Acerca de mi</h2>
+            <div class="cards-container">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        
+                        <div class="flip-card-front">
+                            <h3 style="font-family: 'Mifuente' sans-serif;">Diseñando...</h3>
+                            <p>Soy diseñador digital enfocado en la creación de experiencias de usuario funcionales y significativas, combinando estética y usabilidad. Mi perfil integra UX/UI, medios interactivos y comunicación visual, lo que me permite abordar proyectos desde una perspectiva conceptual y técnica.</p>
+                            <span>Education: Bachelor's in Graphic Design</span>
+                            
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Formación</h3>
+                            <p>Diseñador apasionado con formación en artes visuales y medios digitales.</p>
+                            <span>Educación: Grado en Diseño Gráfico</span>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h3>Skills & Expertise</h3>
+                            <p>Proficient in Adobe Creative Suite, Figma, HTML/CSS, and various design methodologies. Always learning new tools.</p>
+                            <span>Specialties: UI/UX Design, Branding, Web Design</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Habilidades</h3>
+                            <p>Dominio de Adobe Creative Suite, Figma, HTML/CSS y diversas metodologías de diseño.</p>
+                            <span>Especialidades: Diseño UI/UX, Branding, Diseño Web</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h3>Experience</h3>
+                            <p>Tengo experiencia en herramientas de diseño, prototipado y desarrollo front-end, lo que facilita la transformación de ideas en soluciones digitales escalables y centradas en el usuario. Me interesa especialmente la innovación, la interactividad y la conexión emocional entre las personas y los productos digitales</p>
+                            <span>Branding || UX/UI || AR ||</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Experiencia</h3>
+                            <p>.</p>
+                            <span>Proyectos: 50+ diseños completados, 20+ clientes satisfechos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+        <!-- Section 3: Tools -->
+    <section class="section3">
+            <div class="carousel tools">
+
+                    <div class="carousel-inner">
+                    <!-- Original slides -->
+                    <div class="slide">
+                        <div class="card">
+                            <img src="iconos/bucket-dynamic-color.png" alt="Photoshop">
+                            <h3>Photoshop</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="card">
+                            <img src="iconos/bucket-dynamic-color.png" alt="Illustrator">
+                            <h3>Illustrator</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="card">
+                            <img src="iconos/lapiz.png" alt="After Effects">
+                            <h3>After Effects</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="card">
+                            <img src="iconos/computador.png" alt="Blender">
+                            <h3>Blender</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="card">
+                            <img src="iconos/rayo.png" alt="Unity">
+                            <h3>Unity</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="card">
+                            <img src="iconos/bombilla.png" alt="Figma">
+                            <h3>Figma</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="card">
+                            <img src="iconos/celular.png" alt="HTML CSS JS">
+                            <h3>HTML, CSS, JavaScript</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="card">
+                            <img src="iconos/bookmark-fav-dynamic-color.png" alt="Office">
+                            <h3>Office</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="card">
+                            <img src="iconos/boy-dynamic-color.png" alt="C#">
+                            <h3>C#</h3>
+                        </div>
+                    </div>
+                    <!-- Duplicate slides for infinite scroll -->
+                    <div class="slide">
+                        <div class="card">
+                            <img src="iconos/bucket-dynamic-color.png" alt="Photoshop">
+                            <h3>Photoshop</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="card">
+                            <img src="iconos/bucket-dynamic-color.png" alt="Illustrator">
+                            <h3>Illustrator</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="card">
+                            <img src="iconos/lapiz.png" alt="After Effects">
+                            <h3>After Effects</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="card">
+                            <img src="iconos/computador.png" alt="Blender">
+                            <h3>Blender</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="card">
+                            <img src="iconos/rayo.png" alt="Unity">
+                            <h3>Unity</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="card">
+                            <img src="iconos/bombilla.png" alt="Figma">
+                            <h3>Figma</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="card">
+                            <img src="iconos/celular.png" alt="HTML CSS JS">
+                            <h3>HTML, CSS, JavaScript</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="card">
+                            <img src="iconos/bookmark-fav-dynamic-color.png" alt="Office">
+                            <h3>Office</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="card">
+                            <img src="iconos/boy-dynamic-color.png" alt="C#">
+                            <h3>C#</h3>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+    </section>
+        <!-- Section 4: Portfolio / Works -->
+    <section class="section4" id="portfolio">
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="tab-ra">Realidad aumentada</button>
+                <button class="tab-btn" data-tab="tab-uxui">UX/UI</button>
+                <button class="tab-btn" data-tab="tab-branding">Branding</button>
+            </div>
+            <div class="tab-contents">
+                <!-- Tab 1: REALIDAD AUMENTADA -->
+                <div class="tab-content active" id="tab-ra">
+                    <div class="part-1">
+                    <model-viewer 
+                    id="modelViewer" 
+                    src="modelos3d/tabolowpolynolosiguiente.glb" 
+                    autoplay camera-controls camera-orbit="auto auto auto" 
+                    min-camera-orbit="auto auto 1m" 
+                    max-camera-orbit="auto auto 4m" 
+                    alt="3D Model">
+                </model-viewer>
+                    <model-viewer id="modelViewer2" src="modelos3d/BICHO AR.glb" autoplay camera-controls camera-orbit="auto auto auto" min-camera-orbit="auto auto 2m" max-camera-orbit="auto auto 6m" alt="3D Model" style="display: none;"></model-viewer>
+                    
+                    <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 20px;">
+                        <div>
+                        <div>
+                            <p>Participé en el reto Bogotá Experience, donde desarrollé invitaciones en realidad aumentada orientadas a mejorar la interacción de los asistentes con el evento. Este proyecto me permitió trabajar con elementos 3D aplicados a experiencias interactivas, incluyendo modelado, rigging y sistemas de partículas. Mi enfoque se centra en integrar tecnologías emergentes para crear experiencias inmersivas que combinen narrativa visual y precisión técnica.</p>
+                        </div>
+                        <div class="model-buttons">
+                            <button class="model-btn active" data-model="1">1</button>
+                            <button class="model-btn" data-model="2">2</button>
+                            <button class="model-btn" data-model="3" disabled style="opacity: 0.5; cursor: not-allowed;">3 (Coming Soon)</button>
+                        </div>  
+                        </div>
+                    </div>
+                    </div>
+                    
+                    <div>
+                            <h2>Proceso</h2>
+                            <div class="pasos">
+                                <div class="pasos-item">
+                                    <img src="iconos/objetivo.png" class="pasos-imagen" alt="">
+                                    <p>Definición del obejtivo de la experiencia de realidad aumentada, identificando el problema o necesidad del usuario</p>
+                                </div>
+                                <div class="pasos-item">
+                                    <img src="iconos/persona.png" class="pasos-imagen" alt="">
+                                    <p>Análisis del usuario y los formatos de accesibilidad más adecuados</p>
+                                </div>
+                                <div class="pasos-item">
+                                    <img src="iconos/lapiz.png" class="pasos-imagen" alt="">
+                                    <p>StoryBoard y proceso de interaccion </p>
+                                </div>
+                                <div class="pasos-item">
+                                    <img src="iconos/celular.png" class="pasos-imagen" alt="">
+                                    <p>Prototipado y desarrollo de elementos visuales</p>
+                                </div>
+                                <div class="pasos-item">
+                                    <img src="iconos/check.png" class="pasos-imagen" alt="">
+                                    <p>Testeo e iteración, verificación de tiempos de carga</p>
+                                </div>
+                            </div>
+                    </div>
+
+                    <div>
+                        <div class="carousel achievements" id="achievementsCarousel">
+                        <button class="carousel-btn prev-btn" id="prevAch"> ‹ </button>
+                        <button class="carousel-btn next-btn" id="nextAch"> › </button>
+                <div class="carousel-inner">
+                    <div class="slide">
+                        <img src="" class="proceso_aumentada" alt="">
+                    </div>
+                    <div class="slide">
+                            <video src="videos/Grabación 2026-04-13 212815.mp4" class="proceso_aumentada" controls></video>
+                    </div>
+                </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Tab 2: UX/UI -->
+                <div class="tab-content" id="tab-uxui">
+                    <div class="tab-uxui" id="tab-uxui">
+
+                        <!-- Floating hero (mirrors the top of the image) -->
+                        <div class="hero-float">
+                <div class="phone-frame">
+                        <img src="iconos/phone_14_01-Photoroom 1.png" alt="">
+                </div>
+                <img src="iconos/bookmark-fav-dynamic-color.png" class="decora" alt="">
+                <span class="float-tag purple">Realidad Aumentada1</span>
+                <span class="float-tag outline">Proceso1</span>
+                <span class="float-tag purple">Realidad Aumentada2</span>
+                <span class="float-tag outline">Proceso2</span>
+                <span class="float-tag purple">Realidad Aumentada3</span>
+                <span class="float-tag outline">Proceso3</span>
+                <p class="bio-text">
+                 En este proyecto apliqué principios de diseño responsive, sistemas de diagramación, jerarquía visual y arquitectura de la información, asegurando una experiencia consistente en distintos dispositivos. También trabajé con grillas, tipografía y enfoques centrados en el usuario.
+                </p>
+                <p class="bio-text1">
+                  Me apasiona el diseño de interfaces y la construcción de experiencias digitales intuitivas. Tuve la oportunidad de trabajar como diseñador y desarrollador en “El Taller de Sara”, donde diseñé y programé su sitio web.
+                </p>
+
+
+
+                        </div>
+                        <!-- ── PROCESO ── -->
+                        <div class="proceso-section">
+                            <div class="proceso-header">
+                                <div class="line"></div>
+                                <h2>Proceso</h2>
+                                <div class="line"></div>
+                            </div>
+                            <!-- Step 1 — number | card | text -->
+                            <div class="step">
+                                <div class="step-text">
+                                    <div class="step-number">1</div>
+                                    <p>Mi proceso UX/UI inicia con la investigación y la creación de moodboards para definir la dirección visual y conceptual del proyecto. Posteriormente desarrollo sistemas de componentes en Figma, priorizando la escalabilidad y la consistencia del diseño.</p>
+                                </div>
+                                <img class="step-card" src="img/celularconmano.png" alt="celularconmano">
+                            </div>
+                            <div class="step">
+                                <img class="step-card" src="img/CELULAREEEEEES.png" alt="celularconmano">
+                                <div class="step-text">
+                                    <div class="step-number">1</div>
+                                
+                                    <p>Continúo con wireframes y prototipos interactivos para validar la experiencia antes de pasar a la etapa de desarrollo. Finalmente, llevo el diseño a código, garantizando coherencia entre la propuesta visual y su implementación funcional.</p>
+                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Tab 3: BRANDING -->
+                <div class="tab-content" id="tab-branding">
+                    
+                    <div class="branding-carousel carousel">
+                        
+                        <div class="brand1">
+                                
+                                <img src="img/separador.png" class="separador" alt="">
+                                <img src="img/gorras.png" alt="">
+
+                            <div class="secciones-branding">
+                                <img src="img/Group 92.png" class="camisas" alt="">
+                                <div class="text">
+                                <h2>brand1</h2>
+                                <p>
+                                    Participé en el concurso de ilustración AVAX, donde mi propuesta fue seleccionada como ganadora para una línea de ropa de la marca “Heroes of the Cipher”. El concepto se basa en una estética cyberpunk, representando un erudito futurista como elemento central. Este proyecto evidencia mi capacidad para construir narrativas visuales sólidas y adaptarlas a aplicaciones de marca en productos físicos.
+                                </p>
+                                
+                            </div>
+                            </div>
+
+                            <img src="img/separador.png" class="separador1" alt="">
+                                
+                            <div class="secciones-branding">
+                                <div class="text">
+                                <img src="img/separador.png" class="separador" alt="">
+                                <h2>Maga Ice Cream</h2>
+                                <p>
+                                    Trabajé como diseñador freelance para la heladería MAGA Ice Cream, donde desarrollé el universo gráfico de la marca. Mis responsabilidades incluyeron fotografía de producto y diseño de piezas impresas como banners y menús. Este proyecto fortaleció mis habilidades en identidad visual, coherencia de marca y adaptación gráfica en diferentes formatos.
+                                </p>
+                                
+                                </div>
+                                <img src="img/Group 91.png" alt="">
+                            </div>
+
+                            <div class="revistas">
+                                <div>
+                                    <div style="position:relative; margin:20px ; padding-top:max(60%,324px);width:50%;height:0;">
+                                    <iframe style="position:absolute;border:none;width:100%;height:100%;border-radius: 10px;left:0;top:0;" src="https://online.fliphtml5.com/saycq/artbook-el-ultimo-gran-paso/" title="artbook-el ultimo gran paso" seamless="seamless" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" ></iframe>
+                                    </div>
+                                    <div>
+                                    <h2>Libro de Arte</h2>
+                                    <p>Proyecto académico enfocado en el diseño editorial de un libro de arte basado en una animación. Trabajé la composición, tipografía y ritmo visual para construir una narrativa coherente que acompañara el contenido original. Este proyecto resalta mi capacidad para traducir conceptos audiovisuales a formatos editoriales.</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style="position:relative; margin:20px ; padding-top:max(60%,324px);width:100%;height:0;">
+                                    <iframe style="position:absolute;border:none;width:80%;height:100%;border-radius: 10px;left:0;top:0;" src="https://online.fliphtml5.com/saycq/qvwm/" title="3. Biblia de producción" seamless="seamless" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" ></iframe>
+                                    </div>
+                                    <h2>Diseño Editorial</h2>
+                                    <p>Proyecto académico centrado en la creación de una biblia de producción para un cortometraje universitario. Organicé los elementos narrativos, visuales y técnicos en un documento claro y estructurado, facilitando su comprensión y uso en procesos creativos y de producción. Destaca mi habilidad en diseño editorial y estructuración de contenido.</p>
+                                </div>    
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+            
+            <script>
+                // Model switching functionality
+                document.addEventListener('DOMContentLoaded', () => {
+                    const modelViewer = document.getElementById('modelViewer');
+                    const modelBtns = document.querySelectorAll('#tab-ra .model-btn');
+                    
+                    const models = {
+                        1: 'modelos3d/tabolowpolynolosiguiente.glb',
+                        2: 'modelos3d/BICHO AR.glb'
+                    };
+                    
+                    modelBtns.forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            if (btn.disabled) return; // Skip disabled button 3
+                            
+                            const modelId = parseInt(btn.dataset.model);
+                            if (!models[modelId]) return;
+                            
+                            // Update active button
+                            modelBtns.forEach(b => b.classList.remove('active'));
+                            btn.classList.add('active');
+                            
+                            // Swap model
+                            modelViewer.src = models[modelId];
+                            modelViewer.updateCompletion(); // Refresh model-viewer
+                        });
+                    });
+                });
+            </script>
+            
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    const tabBtns = document.querySelectorAll('.tab-btn');
+                    const tabContents = document.querySelectorAll('.tab-content');
+                    tabBtns.forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            const target = btn.dataset.tab;
+                            tabBtns.forEach(b => b.classList.remove('active'));
+                            btn.classList.add('active');
+                            tabContents.forEach(c => c.classList.remove('active'));
+                            document.getElementById(target).classList.add('active');
+                        });
+                    });
+                });
+            </script>
+    </section>
+        <!-- Section 5: Logros -->
+    <section class="section5" id="services">
+            <h2>Logros</h2>
+            <p>Competencias en las que he participado</p>
+            <div class="carousel achievements" id="achievementsCarousel">
+                <button class="carousel-btn prev-btn" id="prevAch"> ‹ </button>
+                <button class="carousel-btn next-btn" id="nextAch"> › </button>
+                <div class="carousel-inner">
+                    <div class="slide">
+                        <div class="slide-content">
+                            <div class="two-columns">
+                                
+                                <div class="cards-column">
+            <div class="tarjeta-logros">
+                <h3>Fenalco - Bogotá Experience</h3>
+                <p>Participación destacada en el evento Bogotá Experience organizado por Fenalco.</p>
+            </div>
+            <div class="tarjeta-logros">
+                <h3>Detalles del Evento</h3>
+                <p>Experiencia enriquecedora con networking y aprendizaje en el ecosistema empresarial bogotano.</p>
+            </div>
+                                </div>
+                                <div class="reel-column">
+                                    <div class="tarjeta-logros">
+                                            <div class="instagram-reel">
+                                                <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DQUBSk2kRRQ/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="https://www.instagram.com/reel/DQUBSk2kRRQ/?utm_source=ig_embed&amp;utm_campaign=loading" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div></div></div><div style="padding: 19% 0;"></div> <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">Ver esta publicación en Instagram</div></div><div style="padding: 12.5% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div> <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div></div><div style="margin-left: auto;"> <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div> <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div> <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;"></div></div></a><p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/reel/DQUBSk2kRRQ/?utm_source=ig_embed&amp;utm_campaign=loading" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">Una publicación compartida de Oficina de Turismo de Bogotá (@bogota_turismo)</a></p></div></blockquote>
+                                                <script async src="//www.instagram.com/embed.js"></script>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="tarjeta-logros">
+                            <h3>Avax</h3>
+                            <p>Competencia Avax donde demostré habilidades y creatividad.</p>
+                        </div>
+                        <div class="tarjeta-logros">
+                            <h3>Nueva Competencia</h3>
+                            <p>Otra competencia destacada donde participé con éxito y aprendí nuevas habilidades.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+  </div>
+    </section>
+
+        <!-- Section 6: Contact -->
+    <section class="section6" id="contact">
+            <h2>Contact Me</h2>
+            <div class="contact-cards">
+                <div class="contact-card email-card">
+                    <h3>📧 Email</h3>
+                    <p>Get in touch via email for any inquiries or collaborations</p>
+                    <a href="mailto:your.email@example.com" class="contact-btn">Send Email</a>
+                </div>
+                <div class="contact-card whatsapp-card">
+                    <h3>💬 WhatsApp</h3>
+                    <p>Chat with me directly on WhatsApp for quick communication</p>
+                    <a href="https://wa.me/1234567890" class="contact-btn" target="_blank">Message on WhatsApp</a>
+                </div>
+            </div>
+    </section>
+    
+    
+    
+    <script>
+        // Carousel control for achievements section
+        document.addEventListener('DOMContentLoaded', () => {
+            const inner = document.querySelector('#achievementsCarousel .carousel-inner');
+            const slides = inner.querySelectorAll('.slide').length;
+            let index = 0;
+            const step = 100 / slides;
+
+            function update() {
+                inner.style.transform = `translateX(-${index * step}%)`;
+            }
+
+            document.getElementById('nextAch').addEventListener('click', () => {
+                index = (index + 1) % slides;
+                update();
+            });
+            document.getElementById('prevAch').addEventListener('click', () => {
+                index = (index - 1 + slides) % slides;
+                update();
+            });
+        });
+    </script>
+
+        
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 My Design Portfolio. All rights reserved.</p>
+    </footer>
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</body>
+</html>
