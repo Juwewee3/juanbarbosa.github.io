@@ -546,7 +546,6 @@ h2{
 }
 
 .carousel.tools .card img {
-    width: 160px;
     height: 100px;
     margin: 0;
     object-fit: contain;
@@ -561,12 +560,11 @@ h2{
     letter-spacing: 2px;
     color: #ffffff;
     padding: 10px 15px;
-    border-radius: 20px;
+    border-radius: 25px;
     text-align: center;
     font-family: 'Mifuente', sans-serif;
     white-space: nowrap;
     width: 40%;
-
     overflow-wrap: break-word;
     word-break: break-word;
 }
