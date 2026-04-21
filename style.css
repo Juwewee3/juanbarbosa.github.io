@@ -904,7 +904,9 @@ h2{
     flex-wrap: wrap;  
 }
 .revistas div{
-    display: flex;width: 90%; align-items: center;
+    display: flex;
+    width: 90%; 
+    align-items: center;
     padding: 10px;
 }
 .revistas div div{
